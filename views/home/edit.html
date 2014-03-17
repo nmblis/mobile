@@ -1,0 +1,637 @@
+<div data-ng-controller="EditController" ng-init="edit()">
+
+    <div class="flex-nmblis-container">
+      <show-nmblis></show-nmblis>
+      <div class="nmblis-edit-grid" ng-show="toggleGrid">
+        <img src="img/grid.png" />
+      </div>
+    </div>
+
+    <div class="flex-edit-controls-container">
+
+      <div class="flex-nmblis-edit-tabs-container">
+      <ul class="flex-nmblis-edit-tabs-container">
+        <li class="flex-nmblis-edit-tab" ng-click="toggleGrid=!toggleGrid"><i class="icon ion-grid"></i></li>
+        <li id="basics" class="flex-nmblis-edit-tab nmblis-edit-tab-selected-tab" ng-click="basicsSelected();tab=''"><i class="icon ion-information-circled"></i></li>
+        <li id="extra" class="flex-nmblis-edit-tab" ng-click="extraSelected();tab='extra'"><i class="icon ion-document-text"></i></li>
+        <li id="flip" class="flex-nmblis-edit-tab" ng-click="flipsideSelected();tab='flipside'"><i class="icon ion-loop"></i></li>
+        <li id="meta" class="flex-nmblis-edit-tab" ng-click="metaSelected();tab='meta'"><i class="icon ion-settings"></i></li>
+        <li id="meta" class="flex-nmblis-edit-tab" ng-click="actionsheet=!actionsheet"><i class="fa fa-save"></i></li>        
+      </ul>
+      </div> 
+      
+      <div class="nmblis-edit-tab-selected" ng-switch on="tab">
+        
+        <div ng-switch-default class="flex-edit-tab-selected-content">
+          
+          <div class="flex-column-top-align " ng-show="basic.page == 'Name'">
+            
+            <div class="flex-row-left-align-subtab">
+              <select class="nmblis-edit-subtab-select" ng-model="basic" ng-options="basics.page for basics in basics"></select>
+              <ul class="flex-row-left-align-subtab">
+                <li id="nameEdit" ng-click="basicsNameEditSubtab();basics.name=''" class="subtabOn"><span class="icon ion-compose"></span></li>
+                <li id="namePosition" ng-click="basicsNamePositionSubtab();basics.name='position'"><span class="icon ion-arrow-move"></span></li>
+              </ul>
+            </div>
+
+            <div ng-switch on="basics.name">
+              <div ng-switch-default>
+                <div class="flex-row-left-align">
+                  <div class="flex-nmblis-font-row-cell">
+                    <span class="flex-edit-preicon icon ion-edit"></span><input type="text" placeholder="First Name" ng-model="nmblis._basics.name.first" />
+                  </div>
+                  <div class="flex-nmblis-font-row-cell">
+                    <span class="flex-edit-preicon icon ion-edit"></span><input type="text" placeholder="Last Name" ng-model="nmblis._basics.name.last" />
+                  </div> 
+                </div>
+                
+                <div class="flex-row-left-align">
+                  <div class="nmblis-font-family">
+                    <span class="flex-edit-preicon fa fa-font"></span>
+                    <select  ng-model="nmblis._basics.name.font" ng-model="fonts" ng-options="font.value as font.name group by font.type for font in fonts"></select>
+                  </div>
+                  <div class="nmblis-font-size">
+                    <span class="flex-edit-preicon fa fa-text-height"></span>
+                    <ul class="">
+                        <li ng-click="nmblis._basics.name.fontSize = nmblis._basics.name.fontSize*1+1"><span class="icon ion-ios7-plus-outline"></span></li>
+                        <li>{{nmblis._basics.name.fontSize}}</li>
+                        <li ng-click="nmblis._basics.name.fontSize = nmblis._basics.name.fontSize*1-1"><span class="icon ion-ios7-minus-outline"></span> </li>
+                      </ul> 
+                  </div>
+                  <div class="flex-color-picker">
+                    <span class="flex-edit-preicon-rowstart glyphicon glyphicon-tint"></span>
+                    <label class="full-length-color-picker" ui-colorpicker ng-model="nmblis._basics.name.fontColor" ></label>
+                  </div>
+                </div>
+              </div>
+              <div ng-switch-when="position">
+                <div class="flex-row-left-align">                      
+                    <div class="nmblis-edit-range-horizontal">
+                      <input ng-model="nmblis._basics.name.x" type="range" min="-45" max="450" step="3"/>
+                    </div>
+                    <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.name.x = nmblis._basics.name.x*1-1"><span class="fa fa-chevron-left fa-2x"></span></button>
+                    <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.name.x = nmblis._basics.name.x*1+1"><span class="fa fa-chevron-right fa-2x"></span></button>
+                </div>
+                <div class="flex-row-left-align">
+                  <div class="nmblis-edit-range-vertical">
+                    <input ng-model="nmblis._basics.name.y" type="range" min="-30" max="300" step="3"/>
+                  </div>
+                  <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.name.y = nmblis._basics.name.y*1+1"><span class="fa fa-chevron-down fa-2x"></span></button>                   
+                  <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.name.y = nmblis._basics.name.y*1-1"><span class="fa fa-chevron-up fa-2x"></span></button>
+                </div>
+              </div>
+
+            </div>     
+          </div>            
+
+          <div class="flex-column-top-align " ng-show="basic.page == 'Title'">
+            
+            <div class="flex-row-left-align-subtab">
+                  <select class="nmblis-edit-subtab-select" ng-model="basic" ng-options="basics.page for basics in basics"></select>
+                  <ul class="flex-row-left-align-subtab">
+                    <li id="titleEdit" ng-click="basicsTitleEditSubtab();basics.title=''" class="subtabOn"><span class="icon ion-compose"></span></li>
+                    <li id="titlePosition" ng-click="basicsTitlePositionSubtab();basics.title='position'"><span class="icon ion-arrow-move"></span></li>
+                  </ul>
+            </div>
+
+              <div ng-switch on="basics.title">  
+                <div ng-switch-default>
+                      <div class="flex-row-left-align">
+                          <div class="flex-nmblis-font-row-cell">
+                            <span class="flex-edit-preicon icon ion-edit"></span><input type="text" placeholder="Title" ng-model="nmblis._basics.title.value" />
+                          </div>
+                      </div>
+
+                      <div class="flex-row-left-align">
+                        <div class="nmblis-font-family">
+                          <span class="flex-edit-preicon fa fa-font"></span>
+                          <select  ng-model="nmblis._basics.title.font" ng-model="fonts" ng-options="font.value as font.name group by font.type for font in fonts"></select>
+                        </div>
+                        <div class="nmblis-font-size">
+                          <span class="flex-edit-preicon fa fa-text-height"></span>
+                          <ul class="">
+                              <li ng-click="nmblis._basics.title.fontSize = nmblis._basics.title.fontSize*1+1"><span class="icon ion-ios7-plus-outline"></span></li>
+                              <li>{{nmblis._basics.title.fontSize}}</li>
+                              <li ng-click="nmblis._basics.title.fontSize = nmblis._basics.title.fontSize*1-1"><span class="icon ion-ios7-minus-outline"></span> </li>
+                            </ul> 
+                        </div>
+                        <div class="flex-color-picker">
+                          <span class="flex-edit-preicon-rowstart glyphicon glyphicon-tint"></span>
+                          <label class="full-length-color-picker" ui-colorpicker ng-model="nmblis._basics.title.fontColor" ></label>
+                        </div>
+                      </div>                                        
+
+                </div>
+                <div ng-switch-when="position">
+                      <div class="flex-row-left-align">                      
+                          <div class="nmblis-edit-range-horizontal">
+                            <input ng-model="nmblis._basics.title.x" type="range" min="-45" max="450" step="3"/>
+                          </div>
+                          <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.title.x = nmblis._basics.title.x*1-1"><span class="fa fa-chevron-left fa-2x"></span></button>
+                          <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.title.x = nmblis._basics.title.x*1+1"><span class="fa fa-chevron-right fa-2x"></span></button>
+                      </div>
+
+                      <div class="flex-row-left-align">
+                        <div class="nmblis-edit-range-vertical">
+                          <input ng-model="nmblis._basics.title.y" type="range" min="-30" max="300" step="3"/>
+                        </div>
+                        <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.title.y = nmblis._basics.title.y*1+1"><span class="fa fa-chevron-down fa-2x"></span></button>                      
+                        <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.title.y = nmblis._basics.title.y*1-1"><span class="fa fa-chevron-up fa-2x"></span></button>
+                      </div>
+                </div>
+              </div>
+
+          </div>
+
+
+
+          <div class="flex-column-top-align " ng-show="basic.page == 'Company'">
+            
+            <div class="flex-row-left-align-subtab">
+                  <select class="nmblis-edit-subtab-select" ng-model="basic" ng-options="basics.page for basics in basics"></select>
+                  <ul class="flex-row-left-align-subtab">
+                    <li id="companyEdit" ng-click="basicsCompanyEditSubtab();basics.company=''" class="subtabOn"><span class="icon ion-compose"></span></li>
+                    <li id="companyPosition" ng-click="basicsCompanyPositionSubtab();basics.company='position'"><span class="icon ion-arrow-move"></span></li>
+                  </ul>
+            </div>
+
+              <div ng-switch on="basics.company">  
+                <div ng-switch-default>
+                      <div class="flex-row-left-align">
+                          <div class="flex-nmblis-font-row-cell">
+                            <span class="flex-edit-preicon icon ion-edit"></span><input type="text" placeholder="Title" ng-model="nmblis._basics.company.value" />
+                          </div>
+                      </div>
+                      
+                      <div class="flex-row-left-align">
+                        <div class="nmblis-font-family">
+                          <span class="flex-edit-preicon fa fa-font"></span>
+                          <select  ng-model="nmblis._basics.company.font" ng-model="fonts" ng-options="font.value as font.name group by font.type for font in fonts"></select>
+                        </div>
+                        <div class="nmblis-font-size">
+                          <span class="flex-edit-preicon fa fa-text-height"></span>
+                          <ul class="">
+                              <li ng-click="nmblis._basics.company.fontSize = nmblis._basics.company.fontSize*1+1"><span class="icon ion-ios7-plus-outline"></span></li>
+                              <li>{{nmblis._basics.company.fontSize}}</li>
+                              <li ng-click="nmblis._basics.company.fontSize = nmblis._basics.company.fontSize*1-1"><span class="icon ion-ios7-minus-outline"></span> </li>
+                            </ul> 
+                        </div>
+                        <div class="flex-color-picker">
+                          <span class="flex-edit-preicon-rowstart glyphicon glyphicon-tint"></span>
+                          <label class="full-length-color-picker" ui-colorpicker ng-model="nmblis._basics.company.fontColor" ></label>
+                        </div>
+                      </div>                
+
+                </div>
+                <div ng-switch-when="position">
+                      <div class="flex-row-left-align">                      
+                          <div class="nmblis-edit-range-horizontal">
+                            <input ng-model="nmblis._basics.company.x" type="range" min="-45" max="450" step="3"/>
+                          </div>
+                          <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.company.x = nmblis._basics.company.x*1-1"><span class="fa fa-chevron-left fa-2x"></span></button>
+                          <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.company.x = nmblis._basics.company.x*1+1"><span class="fa fa-chevron-right fa-2x"></span></button>
+                      </div>
+
+                      <div class="flex-row-left-align">
+                        <div class="nmblis-edit-range-vertical">
+                          <input ng-model="nmblis._basics.company.y" type="range" min="-30" max="300" step="3"/>
+                        </div>
+                        <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.company.y = nmblis._basics.company.y*1+1"><span class="fa fa-chevron-down fa-2x"></span></button>                      
+                        <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.company.y = nmblis._basics.company.y*1-1"><span class="fa fa-chevron-up fa-2x"></span></button>
+                      </div>
+                </div>
+              </div>
+          </div>
+
+
+          <div class="flex-column-top-align " ng-show="basic.page == 'Background'">
+            
+            <div class="flex-row-left-align-subtab">
+                  <select class="nmblis-edit-subtab-select" ng-model="basic" ng-options="basics.page for basics in basics"></select>
+                  <ul class="flex-row-left-align-subtab">
+                    <li> <span class="nmblis-edit-desc"> <5mb; gif, jpg, or png only</li>
+                  </ul>
+            </div>
+
+            <div class="flex-row-left-align">
+                <input id="bgPic" ng-model="nmblis._basics.background.url" type="file" ng-file-select="bgFileSelect($files)"/>
+                <ul class="flex-row-left-align-image-subtab">
+                  <li id="" ng-click="bgUpload()" class="fullborder"><span class="icon ion-upload"></span></li>
+                  <li id="companyPosition" ng-click="backgroundClear()" class="fullborder"><span class="icon ion-close-circled"></span></li>
+                </ul>
+            </div>
+            <div class="flex-row-left-align">
+              <div class="flex-color-picker flex-color-picker-full-row">
+                <span class="flex-edit-preicon-rowstart glyphicon glyphicon-tint"></span>
+                <label class="full-length-color-picker" ui-colorpicker ng-model="nmblis._basics.background.color" ></label>
+              </div> 
+            </div>
+
+          </div>
+          
+          <div class="flex-column-top-align " ng-show="basic.page == 'Image'">
+            
+            <div class="flex-row-left-align-subtab">
+                  <select class="nmblis-edit-subtab-select" ng-model="basic" ng-options="basics.page for basics in basics"></select>
+                  <ul class="flex-row-left-align-subtab">
+                    <li id="imageEdit" ng-click="basicsImageEditSubtab();basics.image=''" class="subtabOn"><span class="icon ion-image"></span></li>
+                    <li id="imagePosition" ng-click="basicsImagePositionSubtab();basics.image='position'"><span class="icon ion-arrow-move"></span></li>
+                  </ul>
+            </div>
+
+            <div ng-switch on="basics.image">  
+              <div ng-switch-default>
+                <div class="flex-row-left-align">
+                    <input id="logoPic" ng-model="nmblis._basics.logo.url" type="file" ng-file-select="logoFileSelect($files)"/>
+                    <ul class="flex-row-left-align-image-subtab">
+                      <li id="" ng-click="logoUpload()" class="fullborder"><span class="icon ion-upload"></span></li>
+                      <li id="companyPosition" ng-click="logoClear()" class="fullborder"><span class="icon ion-close-circled"></span></li>
+                    </ul>
+                </div>
+              </div>
+              <div ng-switch-when="position">
+                <div class="flex-row-left-align">                      
+                      <div class="nmblis-edit-range-horizontal">
+                        </span><input ng-model="nmblis._basics.logo.x" type="range" min="-45" max="450" step="3"/>
+                      </div>
+                      <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.logo.x = nmblis._basics.logo.x*1-1"><span class="fa fa-chevron-left fa-2x"></span></button>
+                      <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.logo.x = nmblis._basics.logo.x*1+1"><span class="fa fa-chevron-right fa-2x"></span></button>
+                </div>
+
+                <div class="flex-row-left-align">
+                  <div class="nmblis-edit-range-vertical">
+                    <input ng-model="nmblis._basics.logo.y" type="range" min="-30" max="300" step="3"/>
+                  </div>
+                  <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.logo.y = nmblis._basics.logo.y*1+1"><span class="fa fa-chevron-down fa-2x"></span></button>                      
+                  <button class="nmblis-edit-position-size-btn" ng-click="nmblis._basics.logo.y = nmblis._basics.logo.y*1-1"><span class="fa fa-chevron-up fa-2x"></span></button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div ng-switch-when="extra" class="flex-edit-tab-selected-content">
+            <div class="flex-row-left-align-subtab ">
+            <select class="nmblis-edit-subtab-select" ng-model="nmblis.extra[$index]" ng-options="extra.value for extra in nmblis.extra" ng-change="setSelected(nmblis.extra[$index])"></select>
+                  <ul class="flex-row-left-align-subtab">
+                    <li ng-click="add()" class="add"><span class="icon ion-ios7-plus-outline"></span></li>
+                    <li id="extraEdit" ng-click="extraEditSubtab();extra=''" class="subtabOn"><span class="icon ion-edit"></span></li>
+                    <li id="extraPosition" ng-click="extraPositionSubtab();extra='position'"><span class="icon ion-arrow-move"></span></li>
+                  </ul>
+            </div>
+
+          <div ng-switch on="extra" class="">  
+            <div ng-switch-default>
+                  <div class="flex-row-left-align" ng-show="selected != ''">
+                   <button class="nmblis-extra-trash-btn flex-center" ng-click="remove(nmblis.extra[$index])"><span class="icon ion-trash-a flex-center-child"></span></button>    
+                      <div class="flex-nmblis-font-row-cell">
+                        <span class="flex-edit-preicon icon ion-edit"></span><input type="text" placeholder="whatever you like" ng-model="selected.value" />
+                      </div>
+                  </div>
+
+                  <div class="flex-row-left-align" ng-show="selected !== ''">
+                        <div class="nmblis-font-family">
+                          <span class="flex-edit-preicon fa fa-font"></span>
+                          <select ng-model="selected.font" ng-model="fonts" ng-options="font.value as font.name group by font.type for font in fonts"></select>
+                        </div>
+
+                        <div class="nmblis-font-size">
+                          <span class="flex-edit-preicon fa fa-text-height"></span>
+                          <ul class="">
+                              <li ng-click="selected.fontSize = selected.fontSize*1+1"><span class="icon ion-ios7-plus-outline"></span></li>
+                              <li>{{selected.fontSize}}</li>
+                              <li ng-click="selected.fontSize = selected.fontSize*1-1"><span class="icon ion-ios7-minus-outline"></span> </li>
+                            </ul> 
+                        </div>
+                        <div class="flex-color-picker">
+                          <span class="flex-edit-preicon-rowstart glyphicon glyphicon-tint"></span>
+                          <label class="full-length-color-picker" ui-colorpicker ng-model="selected.fontColor" ></label>
+                        </div>
+                  </div> 
+
+            </div>
+            <div ng-switch-when="position">
+                <div class="flex-row-left-align" ng-show="selected !== ''">                      
+                  <div class="nmblis-edit-range-horizontal">
+                    </span><input ng-model="selected.x" type="range" min="-45" max="450" step="3"/>
+                  </div>
+                  <button class="nmblis-edit-position-size-btn" ng-click="selected.x = selected.x*1-1"><span class="fa fa-chevron-left fa-2x"></span></button>
+                  <button class="nmblis-edit-position-size-btn" ng-click="selected.x = selected.x*1+1"><span class="fa fa-chevron-right fa-2x"></span></button>
+                </div>
+                <div class="flex-row-left-align" ng-show="selected !== ''">
+                  <div class="nmblis-edit-range-vertical">
+                    <input ng-model="selected.y" type="range" min="-30" max="300" step="3"/>
+                  </div>
+                  <button class="nmblis-edit-position-size-btn" ng-click="selected.y = selected.y*1+1"><span class="fa fa-chevron-down fa-2x"></span></button>                      
+                  <button class="nmblis-edit-position-size-btn" ng-click="selected.y = selected.y*1-1"><span class="fa fa-chevron-up fa-2x"></span></button>
+                </div>
+            </div>
+          </div>
+        </div>
+
+      <div ng-switch-when="flipside" class="flex-edit-tab-selected-content">
+
+          <div class="flex-column-top-align " ng-show="side.page == 'Text'">
+            <div class="flex-row-left-align-subtab">
+            <select class="nmblis-edit-subtab-select" ng-model="side" ng-options="flipside.page for flipside in flipside"></select>
+              <ul class="flex-row-left-align-subtab">
+                <li id="flipsideTextEdit" ng-click="flipsideTextEditSubtab();flipside.text=''" class="subtabOn"><span class="icon ion-edit"></span></li>
+                <li id="flipsideTextPosition" ng-click="flipsideTextPositionSubtab();flipside.text='position'"><span class="icon ion-arrow-move"></span></li>
+              </ul>
+            </div>
+
+            
+
+            <div ng-switch on="flipside.text" >  
+              <div ng-switch-default>
+                <div class="flex-row-left-align">
+                    <div class="flex-nmblis-font-row-cell">
+                      <span class="flex-edit-preicon icon ion-edit"></span><input type="text" placeholder="whatever you like" ng-model="nmblis.flipside.text.value" />
+                    </div>
+                </div>
+                
+                      <div class="flex-row-left-align">
+                        <div class="nmblis-font-family">
+                          <span class="flex-edit-preicon fa fa-font"></span>
+                          <select  ng-model="nmblis.flipside.text.font" ng-model="fonts" ng-options="font.value as font.name group by font.type for font in fonts"></select>
+                        </div>
+                        <div class="nmblis-font-size">
+                          <span class="flex-edit-preicon fa fa-text-height"></span>
+                          <ul class="">
+                              <li ng-click="nmblis.flipside.text.fontSize = nmblis.flipside.text.fontSize*1+1"><span class="icon ion-ios7-plus-outline"></span></li>
+                              <li>{{nmblis.flipside.text.fontSize}}</li>
+                              <li ng-click="nmblis.flipside.text.fontSize = nmblis.flipside.text.fontSize*1-1"><span class="icon ion-ios7-minus-outline"></span> </li>
+                            </ul> 
+                        </div>
+                        <div class="flex-color-picker">
+                          <span class="flex-edit-preicon-rowstart glyphicon glyphicon-tint"></span>
+                          <label class="full-length-color-picker" ui-colorpicker ng-model="nmblis.flipside.text.fontColor" ></label>
+                        </div>
+                      </div>    
+              </div>
+              <div ng-switch-when="position">
+                <div class="flex-row-left-align">                      
+                    <div class="nmblis-edit-range-horizontal">
+                      <input ng-model="nmblis.flipside.text.x" type="range" min="-45" max="450" step="3"/>
+                    </div>
+                    <button class="nmblis-edit-position-size-btn" ng-click="nmblis.flipside.text.x = nmblis.flipside.text.x*1-1"><span class="fa fa-chevron-left fa-2x"></span></button>
+                    <button class="nmblis-edit-position-size-btn" ng-click="nmblis.flipside.text.x = nmblis.flipside.text.x*1+1"><span class="fa fa-chevron-right fa-2x"></span></button>
+                </div>
+
+                <div class="flex-row-left-align">
+                  <div class="nmblis-edit-range-vertical">
+                    <input ng-model="nmblis.flipside.text.y" type="range" min="-30" max="300" step="3"/>
+                  </div>
+                  <button class="nmblis-edit-position-size-btn" ng-click="nmblis.flipside.text.y = nmblis.flipside.text.y*1+1"><span class="fa fa-chevron-down fa-2x"></span></button>                      
+                  <button class="nmblis-edit-position-size-btn" ng-click="nmblis.flipside.text.y = nmblis.flipside.text.y*1-1"><span class="fa fa-chevron-up fa-2x"></span></button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+          <div class="flex-column-top-align " ng-show="side.page == 'Background'">
+              <div class="flex-row-left-align-subtab">
+                  <select class="nmblis-edit-subtab-select" ng-model="side" ng-options="flipside.page for flipside in flipside"></select>
+                  <ul class="flex-row-left-align-subtab">
+                    <li> <span class="nmblis-edit-desc"> <5mb; gif, jpg, or png</li>
+                  </ul>
+              </div>
+              <div class="flex-row-left-align">
+                  <input id="flipsideBgPic" ng-model="nmblis.flipside.background.url" type="file" ng-file-select="flipsideBgFileSelect($files)"/>
+                  <ul class="flex-row-left-align-image-subtab">
+                    <li ng-click="flipsideBgUpload()" class="fullborder"><span class="icon ion-upload"></span></li>
+                    <li ng-click="flipsideBackgroundClear()" class="fullborder"><span class="icon ion-close-circled"></span></li>
+                  </ul>
+              </div>
+              <div class="flex-row-left-align">
+                <div class="flex-color-picker flex-color-picker-full-row">
+                  <span class="flex-edit-preicon-rowstart glyphicon glyphicon-tint"></span>
+                  <label class="full-length-color-picker" ui-colorpicker ng-model="nmblis.flipside.background.color" ></label>
+                </div> 
+              </div>
+          </div>
+
+          <div class="flex-column-top-align " ng-show="side.page == 'Image'">
+            <div class="flex-row-left-align-subtab">
+            <select class="nmblis-edit-subtab-select" ng-model="side" ng-options="flipside.page for flipside in flipside"></select>
+              <ul class="flex-row-left-align-subtab">
+                <li id="flipsideImageEdit" ng-click="flipsideImageEditSubtab();flipside.image=''" class="subtabOn"><span class="icon ion-image"></span></li>
+                <li id="flipsideImagePosition" ng-click="flipsideImagePositionSubtab();flipside.image='position'"><span class="icon ion-arrow-move"></span></li>
+              </ul>
+            </div>
+            <div ng-switch on="flipside.image" >  
+              <div ng-switch-default>
+                <div class="flex-row-left-align">
+                    <input id="flipsideLogoPic" ng-model="nmblis.flipside.logo.url" type="file" ng-file-select="flipsideLogoFileSelect($files)"/>
+                    <ul class="flex-row-left-align-image-subtab">
+                      <li id="" ng-click="flipsideLogoUpload()"><span class="icon ion-upload"></span></li>
+                      <li ng-click="flipsideLogoClear()"><span class="icon ion-close-circled"></span></li>
+                    </ul>
+                </div>
+              </div>
+              <div ng-switch-when="position">
+                <div class="flex-row-left-align">                      
+                      <div class="nmblis-edit-range-horizontal">
+                        </span><input ng-model="nmblis.flipside.logo.x" type="range" min="-45" max="450" step="3"/>
+                      </div>
+                      <button class="nmblis-edit-position-size-btn" ng-click="nmblis.flipside.logo.x = nmblis.flipside.logo.x*1-1"><span class="fa fa-chevron-left fa-2x"></span></button>
+                      <button class="nmblis-edit-position-size-btn" ng-click="nmblis.flipside.logo.x = nmblis.flipside.logo.x*1+1"><span class="fa fa-chevron-right fa-2x"></span></button>
+                </div>
+                <div class="flex-row-left-align">
+                  <div class="nmblis-edit-range-vertical">
+                    <input ng-model="nmblis.flipside.logo.y" type="range" min="-30" max="300" step="3"/>
+                  </div>
+                  <button class="nmblis-edit-position-size-btn" ng-click="nmblis.flipside.logo.y = nmblis.flipside.logo.y*1+1"><span class="fa fa-chevron-down fa-2x"></span></button>                      
+                  <button class="nmblis-edit-position-size-btn" ng-click="nmblis.flipside.logo.y = nmblis.flipside.logo.y*1-1"><span class="fa fa-chevron-up fa-2x"></span></button>
+                </div>
+              </div>
+              </div>
+            </div>
+      </div>
+
+
+
+    <div ng-switch-when="meta" class="flex-edit-tab-selected-content">
+
+          <div ng-show="meta.page =='Permissions'">  
+
+              <div class="flex-row-left-align-subtab">
+            <select class="nmblis-edit-subtab-select" ng-model="meta" ng-options="metas.page for metas in metas"></select>
+                <ul class="flex-row-left-align-subtab">
+                  <li><span class="nmblis-edit-desc">Set the permissions for your Nmblis</span></li>
+                </ul>
+              </div>
+
+              <div class="flex-row-left-align">
+                <ul class="flex-row-left-align-image-subtab">
+                 <li  ng-show="nmblis._meta.published.value == 'yes'" ng-click="publishNo();permission='Published'"><span class="icon ion-locked"></span></li>
+                  <li  ng-show="nmblis._meta.published.value == 'no'" ng-click="publishYes();permission='Published'"><span class="icon ion-unlocked off"></span></li>
+                  <li ng-show="nmblis.flipside.activated == 'yes'" ng-click="deactivate();permission='Activated'"><span class="icon ion-loop"></span></li>               
+                  <li ng-show="nmblis.flipside.activated == 'no'" ng-click="activate();permission='Activated'"><span class="icon ion-loop off"></span></li>
+                    <li ng-show="nmblis.flipside.side == 'a'" ng-click="toBside();permission='Flipside'"><span class="icon ion-loop nmblis-edit-desc">FRONT</span></li>
+                  <li ng-show="nmblis.flipside.side == 'b'" ng-click="toAside();permission='Flipside'" ><span class="icon ion-loop nmblis-edit-desc">BACK</span></li>
+                  <li ng-show="nmblis._meta.cloneable.value == 'yes'" ng-click="cloneableNo();permission='Cloneable'"><span class="fa fa-copy"></span></li>
+                  <li ng-show="nmblis._meta.cloneable.value == 'no'" ng-click="cloneableYes();permission='Cloneable'"><span class="fa fa-file-o off"></span></li>
+                  <li ng-show="nmblis._meta.shareable.value == 'yes'" ng-click="shareableNo();permission='Shareable'"><span class="fa fa-qrcode" ></span></li>
+                  <li ng-show="nmblis._meta.shareable.value == 'no'" ng-click="shareableYes();permission='Shareable'"><span class="fa fa-square off" ></span></li>                                                                      
+                </ul>
+              </div>
+
+              <div class="flex-row-left-align" ng-switch on="permission">
+                        <div class="nmblis-edit-meta-permission-info" ng-switch-default>
+                          <div ng-show="nmblis._meta.published.value == 'no'">
+                            <h4>Your Nmblis is <strong>not</strong> currently published.</h4><p>Once your Nmblis is published, you can no longer edit it, but you will be able to share it with the world.</p>
+                          </div>
+                          <div ng-show="nmblis._meta.published.value == 'yes'">
+                            <h4>Your Nmblis <strong>is</strong> published.</h4><p>Once your Nmblis is published, you can no longer edit it, but you will be able to share it with the world.</p>
+                          </div>
+                        </div>
+
+                        <div class="nmblis-edit-meta-permission-info" ng-switch-when="Activated">
+                          <div ng-show="nmblis.flipside.activated == 'no'">
+                            <h4>The Flipside of this Nmblis is <strong>not</strong> activated.</h4><p>When activated, the Flipside will be visible.</p>
+                          </div>
+                          <div ng-show="nmblis.flipside.activated == 'yes'">
+                            <h4>The Flipside of this Nmblis <strong>is</strong> activated.</h4><p>When activated, the Flipside will be visible.</p>
+                          </div>
+                        </div>
+
+                        <div class="nmblis-edit-meta-permission-info" ng-switch-when="Flipside">
+                            <div ng-show="nmblis.flipside.side == 'a'">
+                              <h4>The Flipside is currently the <strong>"front"</strong> of your Nmlbis.</h4><p>Only when activated, will the Flipside be visible.</p>
+                            </div>
+                            <div ng-show="nmblis.flipside.side == 'b'">
+                              <h4>The Flipside is currently the <strong>"back"</strong> of your Nmlbis.</h4><p>Only when activated, will the Flipside be visible.</p>
+                            </div>
+                        </div>
+
+
+                        <div class="nmblis-edit-meta-permission-info" ng-switch-when="Archive">
+                          <div ng-show="nmblis._meta.archive.value == 'no'">
+                            <h4>Your Nmblis is <strong>not</strong> currently archived.</h4><p>Archiving your Nmblis removes it from your home screen, and puts it on your Archive screen.<p>
+                          </div>
+                          <div ng-show="nmblis._meta.archive.value == 'yes'">
+                            <h4>Your Nmblis <strong>is</strong> currently archived.</h4><p>Archiving your Nmblis removes it from your home screen, and puts it on your Archive screen.</p>
+                          </div>
+                        </div>
+
+                        <div class="nmblis-edit-meta-permission-info" ng-switch-when="Cloneable">
+                          <div ng-show="nmblis._meta.cloneable.value == 'no'">
+                            <h4>Your Nmblis is <strong>not</strong> currently clonable.</h4><p>Making a Nmblis cloneable allows people to clone its layout.</p>
+                          </div>
+                          <div ng-show="nmblis._meta.cloneable.value == 'yes'">
+                            <h4>Your Nmblis <strong>is</strong> currently clonable.</h4><p>Making a Nmblis cloneable allows people to clone its layout.</p>
+                          </div>
+                        </div>
+
+                        <div class="nmblis-edit-meta-permission-info" ng-switch-when="Shareable">
+                          <div ng-show="nmblis._meta.shareable.value == 'no'">
+                            <h4>Your Nmblis is <strong>not</strong> currently shareable.</h4><p>Making a Nmblis shareable allows people you have shared this Nmblis with to share it with the world.</p>
+                          </div>
+                          <div ng-show="nmblis._meta.shareable.value == 'yes'">
+                            <h4>Your Nmblis <strong>is</strong> currently shareable.</h4><p>>Making a Nmblis shareable allows people you have shared this Nmblis with to share it with the world.<p>
+                          </div>
+                        </div>
+
+              </div>
+
+            </div>
+            <div ng-show="meta.page=='Pic'">
+                
+                <div class="flex-row-left-align">  
+                  <select class="nmblis-edit-subtab-select" ng-model="meta" ng-options="metas.page for metas in metas"></select>
+                  <input id="metaPic" ng-model="nmblis._meta.url.value" type="file" ng-file-select="metaFileSelect($files)"/>
+                  <ul class="flex-row-left-align-image-subtab">
+                    <li ng-click="metaUpload()" class="fullborder"><span class="icon ion-upload"></span></li>
+                    <li ng-click="metaClear()" class="fullborder"><span class="icon ion-close-circled"></span></li>
+                  </ul>
+                </div>
+
+                <div class="flex-pic-row">  
+                    <div class="nmblis-profile-pic-container">
+                      <img class="pic" ng-show="nmblis._meta.url.value != ''" ng-src="http://nmblis.com/nmblis/{{nmblisId}}/meta/{{nmblis._meta.url.value}}" />
+                        <img class="pic" ng-show="nmblis._meta.url.value === ''" ng-src="img/blank-user.png" />
+                  </div>
+                </div>
+
+
+            </div>
+
+            <div ng-show="meta.page=='Social Media'">
+              <div class="flex-row-left-align">
+                <select class="nmblis-edit-subtab-select" ng-model="meta" ng-options="metas.page for metas in metas"></select>
+                <ul class="flex-row-left-align-subtab">
+                  <li><span class="nmblis-edit-desc">Share your Social Networks</span></li>
+                </ul>
+              </div>
+  
+            <div class="flex-row-left-align-social-media">  
+              <ul class="flex-row-left-align-subtab">
+                <li ng-show="nmblis._meta.facebook.value !== ''" ng-click="socialMedia='facebook'"><img src="img/facebook.png" /></li>
+                <li ng-show="nmblis._meta.facebook.value == ''" ng-click="socialMedia='facebook'"><img src="img/facebook_bw.png" /></li>
+                <li ng-show="nmblis._meta.twitter.value !== ''" ng-click="socialMedia='twitter'"><img src="img/twitter.png" /></li>
+                <li ng-show="nmblis._meta.twitter.value == ''" ng-click="socialMedia='twitter'"><img src="img/twitter_bw.png" /></li>
+                <li ng-show="nmblis._meta.linkedin.value !== ''" ng-click="socialMedia='linkedin'"><img src="img/linkedin.png" /></li>
+                <li ng-show="nmblis._meta.linkedin.value == ''" ng-click="socialMedia='linkedin'"><img src="img/linkedin_bw.png" /></li>
+                <li ng-show="nmblis._meta.googleplus.value !== ''" ng-click="socialMedia='googleplus'"><img src="img/googleplus.png" /></li>
+                <li ng-show="nmblis._meta.googleplus.value == ''"  ng-click="socialMedia='googleplus'"><img src="img/googleplus_bw.png" /></li>
+                <li ng-show="nmblis._meta.pinterest.value !== ''" ng-click="socialMedia='pinterest'"><img src="img/pinterest.png" /></li>
+                <li ng-show="nmblis._meta.pinterest.value == ''"  ng-click="socialMedia='pinterest'"><img src="img/pinterest_bw.png" /></li>
+                <li ng-show="nmblis._meta.tumblr.value !== ''" ng-click="socialMedia='tumblr'"><img src="img/tumblr.png" /></li>
+                <li ng-show="nmblis._meta.tumblr.value == ''"  ng-click="socialMedia='tumblr'"><img src="img/tumblr_bw.png" /></li>
+                <li ng-show="nmblis._meta.instagram.value !== ''" ng-click="socialMedia='instagram'"><img src="img/instagram.png" /></li>
+                <li ng-show="nmblis._meta.instagram.value == ''" ng-click="socialMedia='instagram'"><img src="img/instagram_bw.png" /></li>
+                <li ng-show="nmblis._meta.flickr.value !== ''" ng-click="socialMedia='flickr'"><img src="img/flickr.png" /></li>
+                <li ng-show="nmblis._meta.flickr.value == ''" ng-click="socialMedia='flickr'"><img src="img/flickr_bw.png" /></li>
+              </ul>
+            </div>
+
+            <div class="flex-row-left-align nmblis-social-media-desc" ng-switch on="socialMedia"> 
+                <div ng-switch-default>
+                  Click on a Social Media icon
+                </div>
+                <div class="flex-child" ng-switch-when="facebook">
+                   <span class="flex-edit-preicon icon ion-edit"></span><input type="text" class="" ng-model="nmblis._meta.facebook.value" placeholder="your Facebook address"/>
+                </div>                  
+                <div class="flex-child" ng-switch-when="twitter">
+                  <span class="flex-edit-preicon icon ion-edit"></span><input type="text" class="" ng-model="nmblis._meta.twitter.value" placeholder="your Twitter address"/>
+                </div>   
+                <div class="flex-child" ng-switch-when="linkedin">
+                  <span class="flex-edit-preicon icon ion-edit"></span><input type="text" class="" ng-model="nmblis._meta.linkedin.value" placeholder="your LinkedIn address"/>
+                </div>   
+                <div class="flex-child" ng-switch-when="googleplus">
+                  <span class="flex-edit-preicon icon ion-edit"></span><input type="text" class="" ng-model="nmblis._meta.googleplus.value" placeholder="your Google+ address"/>
+                </div>   
+                <div class="flex-child" ng-switch-when="pinterest">
+                <span class="flex-edit-preicon icon ion-edit"></span><input type="text" class="" ng-model="nmblis._meta.pinterest.value" placeholder="your Pinterest address"/>
+                </div>   
+                <div class="flex-child" ng-switch-when="tumblr">
+                  <span class="flex-edit-preicon icon ion-edit"></span><input type="text" class="" ng-model="nmblis._meta.tumblr.value" placeholder="your Tumblr address"/>
+                </div>   
+                <div class="flex-child" ng-switch-when="instagram">
+                  <span class="flex-edit-preicon icon ion-edit"></span><input type="text" class="" ng-model="nmblis._meta.instagram.value" placeholder="your Instagram address"/>
+                </div>   
+                <div class="flex-child" ng-switch-when="flickr">
+                  <span class="flex-edit-preicon icon ion-edit"></span><input type="text" class="" ng-model="nmblis._meta.flickr.value" placeholder="your Flickr address"/>
+                </div>                                     
+            </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actionsheet" ng-show="actionsheet">
+        <button class="action action-delete"  ng-show="confirmTrash" id="trash" ng-click="trash()"><span class="icon ion-trash-a"></span></button>
+        <button class="action action-delete safety-orange" ng-hide="confirmTrash" id="confirmTrash" ng-click="confirmDelete()"><span class="icon ion-nuclear"></span></button>  
+        <button class="action" ng-click="reset();actionsheet=!actionsheet"><span class="icon ion-ios7-rewind"></span></button>        
+        <button class="action" ng-click="actionsheet=!actionsheet"><span class="icon ion-arrow-return-left"></span></button>
+        <button class="action action-save" id="save" ng-click="save()"><span class="fa fa-save"></span></button>
+      </div>      
+
+
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div role="navigation" data-ng-controller="HeaderController" class="header">
+    
+
+
+      <a class="navbar-brand" href="#/home" ng-click="collapse()">Nmblis<strong class="beta">beta</strong></a>
+    </div>
+
+    <div ng-hide="auth">
+      <ul class="nmblis-navbar nav navbar-nav navbar-collapse collapse navbar-right">
+        <li><a href="#/howto" ng-click="collapse()" class="nmblis-menu-item">How To</a></li>
+        <li><a href="http://nmblis.com/blog/" target="_blank" class="nmblis-menu-item">Blog</a></li>
+        <li><a href="#/login" ng-click="collapse()" class="nmblis-menu-item">Signin</a></li>
+        <li><a href="#/register" ng-click="collapse()" class="nmblis-menu-item">Register</a></li>
+      </ul>
+    </div>
+    <div ng-show="auth">
+      <div class="menu-btn pull-right"><span class="icon ion-navicon-round"></span></div>
+
+<!--       <ul class="nmblis-navbar nav navbar-nav navbar-right navbar-collapse collapse">
+          <li ng-click="camera();collapse()" class="nmblis-menu-item"><a>Camera</a></li>
+          <li data-ng-repeat="entry in navbarEntries" data-ng-class="{ active: entry.isActive }">            
+            <a href="#{{entry.link}}" ng-click="collapse()" class="nmblis-menu-item">{{entry.title}}</a>
+          </li>
+          <li><a href="http://nmblis.com/blog/" target="_blank" class="nmblis-menu-item">Blog</a></li>
+          <li><a href="" ng-click="logout();collapse()" class="nmblis-menu-item">Signout</a></li>
+      </ul> -->
+    </div>
+  
+</div>

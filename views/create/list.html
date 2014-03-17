@@ -1,0 +1,34 @@
+<div ng-controller="CreateController" class="nmblis-list">
+		<div class="nmblis-create-functions">
+			<ul>
+				<li id="nmblisList" class="selected-active" ng-click="create='template';nmblisList()"><span class="fa fa-magic"></span>&nbsp;<span class="icon ion-cloud"></span></li>
+				<li id="libraryList" ng-click="create='library';libraryList()"><span class="icon ion-ios7-contact-outline"></span>&nbsp;<span class="icon ion-ios7-albums-outline"></span></li>
+			</ul>
+		</div>
+ 		<div ng-switch on="create">
+			<div ng-switch-default ng-init="nmblisTemplates()">  	
+			  	<div class="nmblis-list-nmblis-container" ng-repeat="nmblis in nmblisCards">
+					<a href="#/create/{{nmblis.$id}}/nmblis">
+						<list-nmblis></list-nmblis>
+				    </a>
+				    <div class="nmblis-belt" ng-show="nmblis.flipside.activated == 'yes'" >	
+						<button id="listFlipShow" ng-click="flipToggle=!flipToggle">
+							<i class="icon ion-loop"></i>
+						</button>
+					</div>		
+				</div>
+			</div>
+		  	<div ng-switch-when="library" ng-init="acquiredTemplates()" >
+			  	<div class="nmblis-list-nmblis-container" ng-repeat="nmblis in acquiredCards" ng-show="nmblis._meta.cloneable.value == 'yes'">
+					<a href="#/create/{{nmblis.$id}}/acquired">
+						<list-nmblis></list-nmblis>
+					</a>
+					<div class="nmblis-belt" ng-show="nmblis.flipside.activated == 'yes'">	
+						<button id="listFlipShow" ng-click="flipToggle=!flipToggle">
+							<i class="icon ion-loop"></i>
+						</button>
+					</div>		
+				</div>
+		  	</div>
+		</div> 
+</div>

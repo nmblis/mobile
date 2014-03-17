@@ -1,0 +1,122 @@
+<div ng-controller="SplashController">
+    
+    <div id="top" class="jumbotron">
+      	<div id="cloudbody" class="container cloudbody animated">
+      		<h1>Nmblis</h1>
+        	<h2>Personal Billboard</h2>
+  		    <div id="jumbotron-sky">
+  		      <div class="cloud x1"></div>
+  		      <div class="cloud x2"></div>
+  		      <div class="cloud x3"></div>
+  		      <div class="cloud x4"></div>
+  		      <div class="cloud x5"></div>
+  		    </div>
+	  	</div>
+    </div> 
+
+    <h2 class="splash-flex-heading subhead">What a Nmblis?</h2>
+
+    <div class="splash-nmblis nmblis-list">
+      <div class="">
+        <show-nmblis></show-nmblis>
+        <div class="splash-list-qr" ng-show="qrToggle">       
+          <img ng-src="http://nmblis.com/nmblis/{{nmblisId}}/qr/nmblis{{nmblisId}}.png">
+        </div>
+      </div>
+
+        <div class="nmblis-belt">
+          <ul>
+            <li ng-click="flipsideShow()" ng-show="flipShow"><span class="icon ion-loop"></span></li>
+            <li ng-click="flipsideHide()" ng-hide="flipShow"><span class="icon ion-loop"></span></li>
+            <li><i class="fa fa-arrow-left"></i> Click <i class="fa fa-arrow-right"></i></li>
+            <li ng-click="qrToggle=!qrToggle">QR</li>
+          </ul>  
+        </div>        
+    </div>
+
+    <div class="sect-border"></div> 
+
+    <h3 class="subhead">How do I Nmblis?</h3>
+      
+    <div class="splash-flex-container">  
+      <div class="splash-howto-item">
+        <div class="splash-circle-lg"><span class="fa fa-magic"></span></div>
+        <h3>Create</h3>
+        <p>Create a Nmblis account. Use our Nmblis editor to personalize your Nmblis 1000%. </p>
+      </div>
+
+      <div class="splash-howto-item">
+        <div class="splash-circle-lg"><span class="fa fa-coffee"></span></div>        
+        <h3>Share</h3>
+        <p>The sharee scans your Nmblis QR code with the Nmblis App.</p>
+      </div> 
+
+      <div class="splash-howto-item">
+        <div class="splash-circle-lg"><span class="fa fa-sun-o"></span></div>  
+        <h3>Bask</h3>
+        <p>That's it.</p>
+      </div>       
+    </div>
+
+    <h3 id="benefits" class="subhead">What's in it for me?</h3>
+      
+    <div class="splash-flex-container">  
+
+      <div class="splash-howto-item">
+        <div class="splash-circle-lg splash-circle-lg-blue"><span class="fa fa-trophy"></span></div>
+        <h3>1000% Customizable</h3>
+        <p>Animated GIFs. Clickable links, emails, and direct dial phone numbers. Whatever you like.</p>
+      </div>
+
+      <div class="splash-howto-item">
+        <div class="splash-circle-lg splash-circle-lg-blue"><span class="fa fa-money"></span></div>      
+        <h3>Keep your money</h3>
+        <p>Nmblis is FREE.  Takes money to make money. Take your money. Make you money.</p>
+      </div> <!-- /.benefit -->
+
+      <div class="splash-howto-item">
+        <div class="splash-circle-lg splash-circle-lg-blue"><span class="fa fa-camera-retro"></span></div>      
+        <h3>Show up and Show out</h3>
+        <p>Your Nmblis is an extenstion of you.  Leave a lasting imopression with everyone.</p>
+      </div>
+
+      <div class="splash-howto-item">
+        <div class="splash-circle-lg splash-circle-lg-blue"><span class="fa fa-qrcode"></span></div>
+        <h3>Easy to Share</h3>
+        <p>All you need is the camera on your phone and the Nmblis App.</p>
+      </div>
+
+      <div class="splash-howto-item">
+        <div class="splash-circle-lg splash-circle-lg-blue"><span class="fa fa-list"></span></div>
+        <h3>Easy to Manage</h3>
+        <p>View your contacts by Nmblis, face, name, company, title, etc...</p>
+      </div>
+
+      <div class="splash-howto-item">
+        <div class="splash-circle-lg splash-circle-lg-blue"><span class="fa fa-plane"></span></div>
+        <h3>With you everywhere</h3>
+        <p>Nmblis lives synched in your phone and on your desktop.</p>
+      </div>
+
+    </div> 
+   
+    <div class="sect-border"></div>
+
+  	<div class="signup">	
+  		<p><a href="#/register" class="btn btn-warning btn-lg">
+  			Sign Me Up
+  			<span class="fa fa-magic"></span>
+  		</a></p>
+  	</div>
+
+    <div class="sect-border"></div>
+
+    <h4 id="about" class="subhead">About Nmblis</h4>
+
+
+    <div class="splash-flex-container text-center">
+      <p>Nmblis is a free service offering a Personal Billboard solution to the business card.  1000% customizable.  Use it to promote you or your business or your product.</p>
+    </div>
+
+
+<div>

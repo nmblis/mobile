@@ -1,0 +1,109 @@
+<div ng-controller="LibraryController" ng-init="view();" class="nmblis-list">
+		<div class="flex-nmblis-container">
+			<show-nmblis></show-nmblis>
+		</div>	
+
+		<div class="nmblis-belt">
+			<ul ng-show="nmblis.flipside.activated == 'no'"  >
+				<li><span class="icon ion-person" ng-click="view=''"></span></li>
+				<li ng-show="nmblis._meta.Location.lat !==''" ng-click="view='location'"><span class="icon ion-location"></span></li>
+				<li ng-show="nmblis._meta.shareable.value == 'yes'" ng-click="view='share'"><span class="fa fa-qrcode"></span></li>
+				<li ng-click="actionsheet=!actionsheet"><span class="fa fa-save" ng-click="view=''"></span></li>
+			</ul>
+			<ul ng-show="nmblis.flipside.activated == 'yes'">
+				<li ng-show="flipShow"  ng-click="flipsideShow()"><span class="icon ion-loop"></span></li>
+				<li ng-hide="flipShow" ng-click="flipsideHide()"><span class="icon ion-loop"></span></li>
+				<li><span class="icon ion-person" ng-click="view=''"></span></li>
+				<li ng-show="nmblis._meta.Location.lat !==''" ng-click="view='location'"><span class="icon ion-location"></span></li>
+				<li ng-show="nmblis._meta.shareable.value == 'yes'" ng-click="view='share'"><span class="fa fa-qrcode"></span></li>
+				<li ng-click="actionsheet=!actionsheet"><span class="fa fa-save"></span></li>
+			</ul>
+		</div>
+
+		<div class="nmblis-view-meta" ng-switch on="view">
+			<div ng-switch-default>
+				<div class="flex-row-view-profile">
+					<div class="nmblis-profile-pic-container">
+						<img ng-show="nmblis._meta.url.value != ''" ng-src="http://nmblis.com/nmblis/{{nmblisId}}/meta/{{nmblis._meta.url.value}}" />
+	         			<img ng-show="nmblis._meta.url.value === ''" ng-src="img/blank_user.png" />
+					</div>
+					<div class="flex-column-left-align">
+						<h2>{{nmblis._basics.name.first}} {{nmblis._basics.name.last}}</h2>
+						<h4>{{nmblis._basics.title.value}}</h4>
+						<h4>{{nmblis._basics.company.value}}</h4>
+						<h4>{{nmblis.meta.Date}}</h4>
+					</div>
+				</div>
+				<div class="flex-row-social-media">
+					<ul>
+						<li ng-show="nmblis._meta.facebook.value != ''">
+							<a ng-href="{{nmblis._meta.facebook.value}}" target="_blank">	
+								<img src="img/facebook.png">
+							</a>
+						</li>
+						<li ng-show="nmblis._meta.twitter.value != ''">
+							<a ng-href="{{nmblis._meta.twitter.value}}" target="_blank">
+								<img src="img/twitter.png">
+							</a>
+						</li>
+						<li ng-show="nmblis._meta.linkedin.value != ''">
+							<a ng-href="{{nmblis._meta.linkedin.value}}" target="_blank">
+								<img src="img/linkedin.png">
+							</a>						
+						</li>
+						<li ng-show="nmblis._meta.googleplus.value != ''">
+							<a ng-href="{{nmblis._meta.googleplus.value}}" target="_blank">
+								<img src="img/googleplus.png">
+							</a>
+						</li>
+					 	<li ng-show="nmblis._meta.pinterest.value != ''">
+							<a ng-href="{{nmblis._meta.pinterest.value}}" target="_blank">
+								<img src="img/pinterest.png">
+							</a>
+						</li>
+						<li ng-show="nmblis._meta.tumblr.value != ''">
+							<a ng-href="{{nmblis._meta.tumblr.value}}" target="_blank">
+								<img src="img/tumblr.png">
+							</a>
+						</li>
+						<li ng-show="nmblis._meta.instagram.value != ''">
+							<a ng-href="{{nmblis._meta.instagram.value}}" target="_blank">
+								<img src="img/instagram.png">
+							</a>
+						</li>
+						<li ng-show="nmblis._meta.flickr.value != ''">
+							<a ng-href="{{nmblis._meta.flickr.value}}" target="_blank">
+								<img src="img/flickr.png">
+							</a>
+						</li>
+					</ul> 
+				</div>
+			</div>
+			
+			<div class="nmblis-view-location" ng-switch-when="location">
+				<img ng-src="http://maps.googleapis.com/maps/api/staticmap?center={{nmblis._meta.Location.lat}},{{nmblis._meta.Location.lng}}&zoom=17&size=450x250&sensor=false&key=AIzaSyCdQ0Q-sbY-_hFsAQRk6wgs1hnf2bYHzoo" />
+			</div>
+			<div ng-switch-when="share">
+				<div class="flex-row-view-profile">
+					<div class="nmblis-profile-pic-container">
+						<img ng-show="nmblis._meta.url.value != ''" ng-src="http://nmblis.com/nmblis/{{nmblisId}}/meta/{{nmblis._meta.url.value}}" />
+	         			<img ng-show="nmblis._meta.url.value === ''" ng-src="img/blank_user.png" />
+					</div>
+					<div class="flex-column-left-align">
+						<h2>{{nmblis._basics.name.first}} {{nmblis._basics.name.last}}</h2>
+						<img class="nmblis-view-qr-pic" ng-src="http://nmblis.com/nmblis/{{nmblisId}}/qr/nmblis{{nmblisId}}.png" />
+					</div>
+				</div>
+			</div>
+		</div>
+			
+		<div  ng-show="actionsheet" class="actionsheet">
+			<ul>
+				<li class="action action-delete" ng-show="confirmTrash" id="trash" ng-click="trash()"><span class="icon ion-trash-a" ></span></li>
+				<li class="action safety-orange" ng-hide="confirmTrash" id="confirmTrash" ng-click="confirmDelete()"><span class="icon ion-nuclear"></span></li>
+				<li class="action"  ng-click="actionsheet=!actionsheet"><span class="icon ion-arrow-return-left"></span></li>
+				<li class="action action-save" ng-click="close()"><span class="icon ion-forward"><span class="icon ion-home"></li>
+			</ul>
+		</div>
+
+</div>

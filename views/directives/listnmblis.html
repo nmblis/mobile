@@ -1,0 +1,141 @@
+<div>
+<div class="nmblis-cardContainer" ng-show="nmblis.flipside.side=='b'">
+  <div id="infoside" ng-hide="flipToggle" class="nmblis-cardCompiled nmblis-primary" ng-style="{
+    'background-color':nmblis._basics.background.color,
+    'background-image':'url(http://nmblis.com/nmblis/'+nmblis.$id+'/bg/'+nmblis._basics.background.url+')'
+    }">
+    
+    <span class="nmblis-cardAlignment" ng-show="nmblis._basics.logo.url != ''"
+    style="left: {{nmblis._basics.logo.x}}px; 
+    top: {{nmblis._basics.logo.y}}px;">
+      <img ng-src="http://nmblis.com/nmblis/{{nmblis.$id}}/logo/{{nmblis._basics.logo.url}}" />
+    </span>
+
+    <span class="nmblis-cardAlignment"
+    style="left: {{nmblis._basics.name.x}}px; 
+    top: {{nmblis._basics.name.y}}px;
+    font-family:{{nmblis._basics.name.font}};
+    color:{{nmblis._basics.name.fontColor}}; 
+    font-size:{{nmblis._basics.name.fontSize}}px;">
+      {{nmblis._basics.name.first}} {{nmblis._basics.name.last}} 
+    </span>
+    
+    <span class="nmblis-cardAlignment"
+    style="left: {{nmblis._basics.company.x}}px; 
+    top: {{nmblis._basics.company.y}}px;
+    font-family:{{nmblis._basics.company.font}};
+    color:{{nmblis._basics.company.fontColor}}; 
+    font-size:{{nmblis._basics.company.fontSize}}px;">
+      {{nmblis._basics.company.value}}
+    </span>
+    
+    <span class="nmblis-cardAlignment"
+    style="left: {{nmblis._basics.title.x}}px; 
+    top: {{nmblis._basics.title.y}}px;
+    font-family:{{nmblis._basics.title.font}};
+    color:{{nmblis._basics.title.fontColor}}; 
+    font-size:{{nmblis._basics.title.fontSize}}px;">
+      {{nmblis._basics.title.value}}
+    </span>
+    
+    <span class="nmblis-cardAlignment" ng-repeat="extra in nmblis.extra" ng-bind-html="extra.value | linky" 
+    style="left: {{extra.x}}px; 
+    top: {{extra.y}}px;
+    font-family:{{extra.font}};
+    color:{{extra.fontColor}}; 
+    font-size:{{extra.fontSize}}px;">
+      {{extra.value}}
+    </span>        
+      
+  </div>
+  <div id="flipside" ng-show="flipToggle" class="nmblis-cardCompiled nmblis-secondary" ng-style="{
+  'background-color':nmblis.flipside.background.color,
+  'background-image':'url(http://nmblis.com/nmblis/'+nmblis.$id+'/flipsidebg/'+nmblis.flipside.background.url+')'
+  }">
+    <span class="nmblis-cardAlignment nmblis-flipsideText"
+    style="left: {{nmblis.flipside.text.x}}px; 
+    top: {{nmblis.flipside.text.y}}px;
+    font-family:{{nmblis.flipside.text.font}};
+    color:{{nmblis.flipside.text.fontColor}}; 
+    font-size:{{nmblis.flipside.text.fontSize}}px;">
+      {{nmblis.flipside.text.value}}
+    </span>
+
+    <span class="nmblis-cardAlignment" ng-show="nmblis.flipside.logo.url != ''"
+    style="left: {{nmblis.flipside.logo.x}}px; 
+    top: {{nmblis.flipside.logo.y}}px;">
+      <img class="nmblis-flipsideLogo" ng-src="http://nmblis.com/nmblis/{{nmblis.$id}}/flipsidelogo/{{nmblis.flipside.logo.url}}" />
+    </span>
+  </div>  
+</div>
+
+<div class="nmblis-cardContainer" ng-show="nmblis.flipside.side=='a'" >
+  <div id="flipside" ng-hide="flipToggle" class="nmblis-cardCompiled nmblis-secondary" ng-style="{
+  'background-color':nmblis.flipside.background.color,
+  'background-image':'url(http://nmblis.com/nmblis/'+nmblis.$id+'/flipsidebg/'+nmblis.flipside.background.url+')'
+  }">
+    <span class="nmblis-cardAlignment nmblis-flipsideText"
+    style="left: {{nmblis.flipside.text.x}}px; 
+    top: {{nmblis.flipside.text.y}}px;
+    font-family:{{nmblis.flipside.text.font}};
+    color:{{nmblis.flipside.text.fontColor}}; 
+    font-size:{{nmblis.flipside.text.fontSize}}px;">
+      {{nmblis.flipside.text.value}}
+    </span>
+
+    <span class="nmblis-cardAlignment" ng-show="nmblis.flipside.logo.url != ''"
+    style="left: {{nmblis.flipside.logo.x}}px; 
+    top: {{nmblis.flipside.logo.y}}px;">
+      <img class="nmblis-flipsideLogo" ng-src="http://nmblis.com/nmblis/{{nmblis.$id}}/flipsidelogo/{{nmblis.flipside.logo.url}}" />
+    </span>
+  </div> 
+  <div id="infoside" ng-show="flipToggle" class="nmblis-cardCompiled nmblis-primary" ng-style="{
+    'background-color':nmblis._basics.background.color,
+    'background-image':'url(http://nmblis.com/nmblis/'+nmblis.$id+'/bg/'+nmblis._basics.background.url+')'
+    }">
+
+    <span class="nmblis-cardAlignment"
+    style="left: {{nmblis._basics.name.x}}px; 
+    top: {{nmblis._basics.name.y}}px;
+    font-family:{{nmblis._basics.name.font}};
+    color:{{nmblis._basics.name.fontColor}}; 
+    font-size:{{nmblis._basics.name.fontSize}}px;">
+      {{nmblis._basics.name.first}} {{nmblis._basics.name.last}} 
+    </span>
+    
+    <span class="nmblis-cardAlignment"
+    style="left: {{nmblis._basics.company.x}}px; 
+    top: {{nmblis._basics.company.y}}px;
+    font-family:{{nmblis._basics.company.font}};
+    color:{{nmblis._basics.company.fontColor}}; 
+    font-size:{{nmblis._basics.company.fontSize}}px;">
+      {{nmblis._basics.company.value}}
+    </span>
+    
+    <span class="nmblis-cardAlignment"
+    style="left: {{nmblis._basics.title.x}}px; 
+    top: {{nmblis._basics.title.y}}px;
+    font-family:{{nmblis._basics.title.font}};
+    color:{{nmblis._basics.title.fontColor}}; 
+    font-size:{{nmblis._basics.title.fontSize}}px;">
+      {{nmblis._basics.title.value}}
+    </span>
+    
+    <span class="nmblis-cardAlignment" ng-show="nmblis._basics.logo.url != ''"
+    style="left: {{nmblis._basics.logo.x}}px; 
+    top: {{nmblis._basics.logo.y}}px;">
+      <img ng-src="http://nmblis.com/nmblis/{{nmblis.$id}}/logo/{{nmblis._basics.logo.url}}" />
+    </span>
+    
+    <span class="nmblis-cardAlignment" ng-repeat="extra in nmblis.extra" ng-bind-html="extra.value | linky" 
+    style="left: {{extra.x}}px; 
+    top: {{extra.y}}px;
+    font-family:{{extra.font}};
+    color:{{extra.fontColor}}; 
+    font-size:{{extra.fontSize}}px;">
+      {{extra.value}}
+    </span>         
+  </div>
+
+</div>
+</div>

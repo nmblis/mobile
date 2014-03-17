@@ -1,0 +1,16 @@
+<div ng-controller="AddController" ng-init="init();" class="nmblis-list">
+	<show-nmblis></show-nmblis>		
+	<div class="nmblis-belt">
+		<ul>
+			<li ng-show="flipShow" ng-click="flipsideShow()"><span class="icon ion-loop"></span></li>
+			<li ng-hide="flipShow" ng-click="flipsideHide()"><span class="icon ion-loop"></span></li></li>
+			<li id="save" ng-click="save()"><span class="fa fa-save"></span></li>
+	  		<li id="cancel" ng-click="close()" ><span class="icon ion-android-close"></span></li>
+		</ul>
+	</div>			
+	<div class="nmblis-add-info">
+		<h3>{{nmblis._basics.name.first}} {{nmblis._basics.name.last}}</h3>
+		<p>{{nmblis._basics.title.value}}</p>
+		<p>{{nmblis._basics.company.value}}</p>
+	</div>
+</div>

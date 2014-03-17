@@ -1,0 +1,43 @@
+<div ng-controller="ArchiveController" class="nmblis-list">
+	<div ng-repeat="nmblis in nmblis" ng-show="nmblis._meta.archive.value == 'yes'" class="nmblis-list-nmblis-container">
+		<div class="">
+			<list-nmblis></list-nmblis>
+			<div class="nmblis-list-qr" ng-show="qrToggle">				
+		    	<img ng-src="http://nmblis.com/nmblis/{{nmblis.$id}}/qr/nmblis{{nmblis.$id}}.png">
+		    </div>
+		</div>
+		<div class="nmblis-belt" ng-show="nmblis.flipside.activated == 'no'">	
+				<button class="nmblis-belt-label pull-right" ng-show="nmblis._meta.published.value !== 'yes'">
+					<a ng-href="#/home/{{nmblis.$id}}/view"><i class="icon ion-eye"></i></a>
+				</button>	
+				<button class="nmblis-belt-label" ng-show="nmblis._meta.published.value !== 'yes'">
+					<a ng-href="#/home/{{nmblis.$id}}/edit"><i class="icon ion-compose"></i></a>
+				</button>					
+			
+				<button class="nmblis-belt-label pull-right" ng-show="nmblis._meta.published.value == 'yes'" >
+					<a ng-href="#/home/{{nmblis.$id}}/view"><i class="icon ion-eye"></i></a>
+				</button>
+				<button class="nmblis-belt-label" ng-show="nmblis._meta.published.value == 'yes'" ng-click="qrToggle=!qrToggle">
+						<i class="fa fa-qrcode"></i>
+				</button>		
+		</div>
+		<div class="nmblis-belt" ng-show="nmblis.flipside.activated == 'yes'">				
+				<button id="listFlipShow" class="nmblis-belt-label nmblis-belt-flip-icon" ng-click="flipToggle=!flipToggle">
+					<i class="icon ion-loop"></i>
+				</button>		
+				<button class="nmblis-belt-label nmblis-belt-label-flip pull-right" ng-show="nmblis._meta.published.value !== 'yes'">
+					<a ng-href="#/home/{{nmblis.$id}}/view"><i class="icon ion-eye"></i></a>
+				</button>									
+				<button class="nmblis-belt-label nmblis-belt-label-flip pull-right" ng-show="nmblis._meta.published.value == 'yes'">
+					<a ng-href="#/home/{{nmblis.$id}}/view"><i class="icon ion-eye"></i></a>
+				</button>
+				<button class="nmblis-belt-label nmblis-belt-label-flip pull-right" ng-show="nmblis._meta.published.value == 'yes'" ng-click="qrToggle=!qrToggle">
+					<i class="fa fa-qrcode"></i>
+				</button>
+				<button class="nmblis-belt-label nmblis-belt-label-flip pull-right" ng-show="nmblis._meta.published.value !== 'yes'">
+					<a ng-href="#/home/{{nmblis.$id}}/edit"><i class="icon ion-compose"></i></a>
+				</button>	
+
+		</div>
+	</div>			
+</div>

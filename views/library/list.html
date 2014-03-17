@@ -1,0 +1,72 @@
+<div ng-controller="LibraryController" ng-init="allNmblis();" class="nmblis-list">
+	
+		<div class="nmblis-library-sort-functions">
+			<div class="flex-row-left-align-sm">
+				<span class="flex-edit-preicon icon ion-search"></span>
+				<input type="text" placeholder="...search..." type="search" ng-model="search" />
+			</div>
+			<div class="flex-row-left-align-sm">
+				<ul class="library-icons-lrg">
+					<li id="nmblisView" class="selected-active" ng-click="library='';nmblisView()"><span class="icon ion-ios7-albums"></li>
+					<li id="listView" ng-click="library='list';listView()"><span class="icon ion-ios7-contact"></li>
+				</ul>
+			</div>
+
+			<div class="flex-row-left-align-smst">
+				<ul>
+					<li id="fnameSort" ng-click="predicate='_basics.name.first'; reverse=!reverse;fnameSort()">First Name</li>					
+					<li id="lnameSort" ng-click="predicate='_basics.name.last'; reverse=!reverse;lnameSort()">Last Name</li>
+					<li id="titleSort" ng-click="predicate='_basics.title.value'; reverse=!reverse;titleSort()">Title</li>
+					<li id="companySort" ng-click="predicate='_basics.company.value'; reverse=!reverse;companySort()">Company</li>
+					<li id="dateSort" class="selected-active" ng-click="predicate='_meta.Date'; reverse=!reverse;dateSort()">Date</li>
+				</ul>
+			</div>
+
+		</div>
+
+		<div class="nmblis-libraryContainer">	
+			<div class="nmblis-createSwitchBody" ng-switch on="library">
+				<div ng-switch-default>
+					<div ng-repeat="nmblis in nmblis | orderBy:predicate:reverse | filter:search" class="nmblis-list-nmblis-container">
+						<a ng-href="#/library/{{nmblis.$id}}/view">
+							<list-nmblis></list-nmblis>	
+						</a>
+						<div class="nmblis-belt">	
+							<button id="listFlipShow" ng-click="flipToggle=!flipToggle" ng-show="nmblis.flipside.activated == 'no'">
+								<i class="icon ion-loop"></i>
+							</button>									
+							<button>
+								<a ng-href="#/library/{{nmblis.$id}}/view">
+									<i class="icon ion-eye"></i>
+								</a>
+							</button>
+						</div>
+
+					</div>
+				</div>
+
+				<div ng-switch-when="list">
+					<div ng-repeat="nmblis in nmblis | orderBy:predicate:reverse | filter:search" >
+						<a ng-href="#/library/{{nmblis.$id}}/view">
+							<div class="nmblis-library-list-container">
+								<div class="nmblis-library-list-pic">
+									<div class="nmblis-viewMetaProfilePic">
+										<img ng-show="nmblis._meta.url.value != ''" ng-src="nmblis/{{nmblis.$id}}/meta/{{nmblis._meta.url.value}}" />
+					         			<img ng-show="nmblis._meta.url.value === ''" ng-src="img/blank_user.png" />
+					         		</div>	
+								</div>
+								<div class="nmblis-library-list-info ">
+									<h3>{{nmblis._basics.name.first}} {{nmblis._basics.name.last}}</h3>
+									<p>{{nmblis._basics.title.value}}<br>
+									{{nmblis._basics.company.value}}<br>
+									{{nmblis._meta.Date}}</p>
+								</div>						
+							</div>
+						</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+</div>

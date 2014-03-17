@@ -1,0 +1,12 @@
+<div data-ng-controller="PushmenuController" class="pushmenu" >
+    
+  <ul class="">
+      <li ng-click="camera();collapse()" class="nmblis-menu-item"><a>Camera</a></li>
+      <li data-ng-repeat="entry in navbarEntries" data-ng-class="{ active: entry.isActive }">            
+        <a href="#{{entry.link}}" ng-click="collapse()" class="nmblis-menu-item">{{entry.title}}</a>
+      </li>
+      <li><a href="" ng-click="logout();collapse()" class="nmblis-menu-item">Signout</a></li>
+  </ul>
+ 
+  
+</div>
